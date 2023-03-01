@@ -8,7 +8,7 @@ std::string getPath() {
 }
 
 std::string createPath(const char* filename) {
-	return std::string(getPath() + "PythonCode/" + std::string(filename));
+	return std::string(getPath() + std::string(filename));
 }
 
 int main(int argc, char* argv[]) {
