@@ -12,6 +12,15 @@ std::string createPath(const char* filename) {
 }
 
 int main(int argc, char* argv[]) {
+	// Get Path
+	const char* filename = "";
+	if (argc > 1) {
+		filename = argv[1];
+	}
+
+	std::string path = createPath(filename);
+	const char* file = path.c_str();
+
 	// Initialize the Python Instance
 	Py_Initialize();
 
@@ -20,12 +29,12 @@ int main(int argc, char* argv[]) {
 			           "print('Today is', ctime(time()))\n");
 
 	// Run a simple file
-	std::string path = createPath("test.py");
-	const char* file = path.c_str();
 	FILE* PScriptFile = fopen(file, "r");
 	if (PScriptFile) {
 		PyRun_SimpleFile(PScriptFile, file);
 		fclose(PScriptFile);
+	} else {
+		std::cout << "There is no '" << filename << "' in " << getPath() << std::endl;
 	}
 
 	// Close the Python Instance

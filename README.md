@@ -11,5 +11,5 @@ cmake -S . -B build
 
 cd build
 make 
-./example
+./python_wrapper test.py
 ```
