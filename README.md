@@ -8,8 +8,7 @@ cd PyCpp_Wrapper
 
 mkdir build
 cmake -S . -B build
+make -C build
 
-cd build
-make 
-./pycpp_wrapper PythonCode/hello.py
+./build/pycpp_wrapper PythonCode/hello.py
 ```
