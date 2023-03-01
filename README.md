@@ -11,5 +11,5 @@ cmake -S . -B build
 
 cd build
 make 
-./pycpp_wrapper hello.py
+./pycpp_wrapper PythonCode/hello.py
 ```
