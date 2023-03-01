@@ -17,7 +17,6 @@ int main(int argc, char* argv[]) {
 	if (argc > 1) {
 		filename = argv[1];
 	}
-
 	std::string path = createPath(filename);
 	const char* file = path.c_str();
 
