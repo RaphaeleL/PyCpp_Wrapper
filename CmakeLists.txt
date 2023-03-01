@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.23)
+project(example)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(/opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/include/python3.11)
+
+find_package(PythonLibs REQUIRED)
+
+add_executable(example main.cpp)
+
+target_include_directories(example PRIVATE ${PYTHON_INCLUDE_DIRS})
+target_link_libraries(example PRIVATE ${PYTHON_LIBRARIES})
