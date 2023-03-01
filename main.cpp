@@ -4,7 +4,7 @@
 
 std::string getPath() {
 	// TODO: Auto Detect Current Working Directory
-	return std::string("/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/boost-test/");
+	return std::string("/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/");
 }
 
 std::string createPath(const char* filename) {
