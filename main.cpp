@@ -31,8 +31,6 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	std::string pythonPath = std::string("sys.path.append(\"") + scriptDir + "\")";
-	//std::cout << "ScriptDir: " << scriptDir << std::endl;
-	//std::cout << "PythonPath: " << pythonPath << std::endl;
 	if (!Py_IsInitialized()) {
 		std::cerr << "Python interpreter is not initialized" << std::endl;
 		return 1;
@@ -45,22 +43,19 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	// Run a simple string
-	PyRun_SimpleString("from time import time,ctime\n"
-			           "print('Today is', ctime(time()))\n");
-
-	// Run a simple file
+	// Run the File
 	FILE* PScriptFile = fopen(file, "r");
 	if (PScriptFile) {
 		PyRun_SimpleFile(PScriptFile, file);
 		fclose(PScriptFile);
 	} else {
-		std::cout << "There is no '" << filename << "' in " << getPath() << std::endl;
+		std::cerr << "There is no '" << filename << "' in " << getPath() << std::endl;
+		PyErr_Print();
+		return 1;
 	}
 
 	// Close the Python Instance
 	Py_Finalize();
-	Py_FinalizeEx();
 
 	return 0;
 }
