@@ -1,6 +1,6 @@
-def hello(to=""):
-    print("Hello", to)
+class Greetings():
+    def hello(to=""):
+        print("Hello", to)
 
-if __name__ == "__main__":
-    hello()
-    hello("John")
+Greetings.hello()
+Greetings.hello("John")

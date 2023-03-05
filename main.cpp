@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include "Python.h"
+//#include <boost/python.hpp>
 
 std::string getPath() {
-	// TODO: Auto Detect Current Working Directory
+	// Auto Detect Current Working Directory
 	return std::string("/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/");
 }
 
@@ -23,6 +24,27 @@ int main(int argc, char* argv[]) {
 	// Initialize the Python Instance
 	Py_Initialize();
 
+    // Add the directory of the Python script to the Python path
+	std::string scriptDir = path.substr(0, path.find_last_of("/\\"));
+	if (scriptDir.empty()) {
+		std::cerr << "Failed to extract script directory from path: " << path << std::endl;
+		return 1;
+	}
+	std::string pythonPath = std::string("sys.path.append(\"") + scriptDir + "\")";
+	//std::cout << "ScriptDir: " << scriptDir << std::endl;
+	//std::cout << "PythonPath: " << pythonPath << std::endl;
+	if (!Py_IsInitialized()) {
+		std::cerr << "Python interpreter is not initialized" << std::endl;
+		return 1;
+	}
+	PyRun_SimpleString("import sys, os\n");
+	PyRun_SimpleString("print(os.getcwd())");
+	if (PyRun_SimpleString(pythonPath.c_str()) == -1) {
+		std::cerr << "Failed to execute Python code: " << pythonPath << std::endl;
+		PyErr_Print();
+		return 1;
+	}
+
 	// Run a simple string
 	PyRun_SimpleString("from time import time,ctime\n"
 			           "print('Today is', ctime(time()))\n");
@@ -38,6 +60,7 @@ int main(int argc, char* argv[]) {
 
 	// Close the Python Instance
 	Py_Finalize();
+	Py_FinalizeEx();
 
 	return 0;
 }
