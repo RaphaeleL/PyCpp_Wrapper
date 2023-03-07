@@ -43,11 +43,10 @@ int main(int argc, char* argv[]) {
 		PyErr_Print();
 		return 1;
 	}
+	PyRun_SimpleString("import sys, os\n");
+	PyRun_SimpleString("print(os.getcwd())");
 
 	// Run the File
-        std::cout << "------------------------" << std::endl;
-        std::cout << file << std::endl;
-        std::cout << "------------------------" << std::endl;
 	FILE* PScriptFile = fopen(file, "r");
 	if (PScriptFile) {
 		PyRun_SimpleFile(PScriptFile, file);
