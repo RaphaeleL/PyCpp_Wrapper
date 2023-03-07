@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include "Python.h"
-//#include <boost/python.hpp>
 
 std::string getPath() {
 	// Auto Detect Current Working Directory
-	return std::string("/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/");
+        std::string macos_path = "/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/";
+        std::string linux_path = "/home/stud-lira1011/master-thesis/bindings/PyCpp_Wrapper/";
+        return linux_path;
 }
 
 std::string createPath(const char* filename) {
@@ -24,7 +25,7 @@ int main(int argc, char* argv[]) {
 	// Initialize the Python Instance
 	Py_Initialize();
 
-    // Add the directory of the Python script to the Python path
+        // Add the directory of the Python script to the Python path
 	std::string scriptDir = path.substr(0, path.find_last_of("/\\"));
 	if (scriptDir.empty()) {
 		std::cerr << "Failed to extract script directory from path: " << path << std::endl;
@@ -44,6 +45,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Run the File
+        std::cout << "------------------------" << std::endl;
+        std::cout << file << std::endl;
+        std::cout << "------------------------" << std::endl;
 	FILE* PScriptFile = fopen(file, "r");
 	if (PScriptFile) {
 		PyRun_SimpleFile(PScriptFile, file);
