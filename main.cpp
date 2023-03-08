@@ -4,9 +4,11 @@
 
 std::string getPath() {
 	// Auto Detect Current Working Directory
-        std::string macos_path = "/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/";
-        std::string linux_path = "/home/stud-lira1011/master-thesis/bindings/PyCpp_Wrapper/";
-        return linux_path;
+    #ifdef __APPLE__ || __MACH__ 
+    return "/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/";
+    #elif __LINUX 
+    return "/home/stud-lira1011/master-thesis/bindings/PyCpp_Wrapper/";
+    #endif
 }
 
 std::string createPath(const char* filename) {
@@ -25,7 +27,7 @@ int main(int argc, char* argv[]) {
 	// Initialize the Python Instance
 	Py_Initialize();
 
-        // Add the directory of the Python script to the Python path
+    // Add the directory of the Python script to the Python path
 	std::string scriptDir = path.substr(0, path.find_last_of("/\\"));
 	if (scriptDir.empty()) {
 		std::cerr << "Failed to extract script directory from path: " << path << std::endl;
