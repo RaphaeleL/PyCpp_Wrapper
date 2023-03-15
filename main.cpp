@@ -5,9 +5,9 @@
 std::string getPath() {
 	// Auto Detect Current Working Directory
     #ifdef __APPLE__
-    return "/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/";
+    return "/Users/raphaelelicciardo/Developer/PyCpp_Wrapper/";
     #elif __MACH__
-    return "/Users/raphaelelicciardo/Studium/Master/Semester-3/Master-Thesis/Code/PyCpp_Wrapper/";
+    return "/Users/raphaelelicciardo/Developer/PyCpp_Wrapper/";
     #elif __LINUX__
     return "/home/stud-lira1011/master-thesis/bindings/PyCpp_Wrapper/";
     #endif
